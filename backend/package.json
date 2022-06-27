@@ -2,7 +2,6 @@
   "type": "module",
   "name": "todo-list-backend",
   "version": "0.0.1",
-  "main": "index.js",
   "scripts": {
     "watch": "nodemon -e ts -w ./src -x npm run serve",
     "serve": "node --loader ts-node/esm --es-module-specifier-resolution=node src/server.ts",
