@@ -11,7 +11,8 @@ Admin.init({
   id: {
     type: DataTypes.BIGINT,
     allowNull: false,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true
   },
   login: {
     type: DataTypes.STRING,

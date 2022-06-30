@@ -13,7 +13,8 @@ Task.init({
   id: {
     type: DataTypes.BIGINT,
     allowNull: false,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true
   },
   user: {
     type: DataTypes.STRING,
