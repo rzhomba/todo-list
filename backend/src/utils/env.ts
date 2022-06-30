@@ -17,6 +17,7 @@ export default {
   applicationPort: env.APPLICATION_PORT,
   cookiesDomain: env.COOKIES_DOMAIN,
   dbHost: env.DB_HOST,
+  dbName: env.DB_NAME,
   dbUser: env.DB_USER,
   dbPass: env.DB_PASS
 }
