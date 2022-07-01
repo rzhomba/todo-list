@@ -11,8 +11,8 @@ interface BaseResponse<ResBody> extends Response<ResBody | BaseData> {
 
 export interface SignInRequest extends Request {
   body: {
-    login: string
-    password: string
+    login?: string
+    password?: string
   }
 }
 
