@@ -32,13 +32,13 @@ const {
   setSortDir
 } = sortSlice.actions
 
-export const sortBy = (by: SortBy): AppThunk =>
+export const sortTasksBy = (by: SortBy): AppThunk =>
   async (dispatch) => {
     dispatch(setSortBy(by))
     dispatch(fetchTasks())
   }
 
-export const sortDir = (dir: SortDir): AppThunk =>
+export const sortTasksDir = (dir: SortDir): AppThunk =>
   async (dispatch) => {
     dispatch(setSortDir(dir))
     dispatch(fetchTasks())

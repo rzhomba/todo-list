@@ -1,20 +1,23 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useAppSelector, useAppDispatch } from '../hooks'
+import { selectSort, sortTasksBy, sortTasksDir } from './sortSlice'
+import { SortBy, SortDir } from './sortTypes'
 import './SortPanel.css'
 
 const SortPanel = () => {
-  const [sortBy, setSortBy] = useState<'user' | 'email' | 'status'>('user')
-  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc')
+  const { sortBy, sortDir } = useAppSelector(selectSort)
+  const dispatch = useAppDispatch()
 
   const handleSortByChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const by = e.target.value as 'user' | 'email' | 'status'
-    setSortBy(by)
+    const by = e.target.value as SortBy
+    dispatch(sortTasksBy(by))
   }
   const handleSortDirChange = () => {
-    const dir = sortDir === 'asc' ? 'desc' : 'asc'
-    setSortDir(dir)
+    const dir: SortDir = sortDir === 'ascending' ? 'descending' : 'ascending'
+    dispatch(sortTasksDir(dir))
   }
 
-  const sortText = sortDir === 'asc' ? 'Ascending' : 'Descending'
+  const sortText = sortDir === 'ascending' ? 'Ascending' : 'Descending'
 
   return (
     <div className="sort">
