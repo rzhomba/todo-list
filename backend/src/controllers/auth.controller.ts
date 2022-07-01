@@ -1,9 +1,9 @@
-import { NextFunction } from 'express'
-import { AuthRequest, AuthResponse } from '../types/request.types'
+import { Request, Response, NextFunction } from 'express'
+import { SignInRequest } from '../types/request.types'
 import { authService } from '../services/auth.service'
 import Env from '../utils/env'
 
-export const signIn = async (req: AuthRequest, res: AuthResponse, next: NextFunction): Promise<void> => {
+export const signIn = async (req: SignInRequest, res: Response, next: NextFunction): Promise<void> => {
   const login = req.body.login
   const password = req.body.password
 
@@ -26,4 +26,16 @@ export const signIn = async (req: AuthRequest, res: AuthResponse, next: NextFunc
   })
     .status(200)
     .send()
+}
+
+export const signOut = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  res.clearCookie('jwt', {
+    domain: Env.cookiesDomain,
+    httpOnly: true,
+    sameSite: true
+  })
+    .status(200)
+    .send()
+
+  next()
 }

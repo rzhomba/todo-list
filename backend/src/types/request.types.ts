@@ -9,18 +9,12 @@ interface BaseData {
 interface BaseResponse<ResBody> extends Response<ResBody | BaseData> {
 }
 
-interface AuthData {
-  token: string
-}
-
-export interface AuthRequest extends Request {
+export interface SignInRequest extends Request {
   body: {
     login: string
     password: string
   }
 }
-
-export interface AuthResponse extends BaseResponse<AuthData> {}
 
 interface TaskListData {
   tasks: Task[]
