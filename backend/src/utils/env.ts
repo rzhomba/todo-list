@@ -16,7 +16,9 @@ if (process.env.NODE_ENV === 'production') {
 export default {
   applicationPort: env.APPLICATION_PORT,
   cookiesDomain: env.COOKIES_DOMAIN,
+  corsOrigin: env.CORS_ORIGIN,
   dbHost: env.DB_HOST,
+  dbPort: Number(env.DB_PORT),
   dbName: env.DB_NAME,
   dbUser: env.DB_USER,
   dbPass: env.DB_PASS,

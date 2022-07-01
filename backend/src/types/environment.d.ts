@@ -6,7 +6,9 @@ declare global {
       NODE_ENV: 'development' | 'production'
       APPLICATION_PORT: string
       COOKIES_DOMAIN: string
+      CORS_ORIGIN: string
       DB_HOST: string
+      DB_PORT: string
       DB_NAME: string
       DB_USER: string
       DB_PASS: string

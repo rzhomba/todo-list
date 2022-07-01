@@ -3,7 +3,7 @@ import Env from './env'
 
 const sequelize = new Sequelize({
   host: Env.dbHost,
-  port: 5432,
+  port: Env.dbPort,
   database: Env.dbName,
   username: Env.dbUser,
   password: Env.dbPass,
