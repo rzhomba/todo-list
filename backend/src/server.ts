@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import cookieParser from 'cookie-parser'
 import models from './models'
 import routes from './routes'
 import env from './utils/env'
@@ -15,6 +16,7 @@ app.use(cors({
   credentials: true,
   optionsSuccessStatus: 200
 }))
+app.use(cookieParser())
 app.use(routes)
 
 app.listen(port, () => {

@@ -10,6 +10,7 @@ declare global {
       DB_NAME: string
       DB_USER: string
       DB_PASS: string
+      JWT_SECRET: string
     }
   }
 }

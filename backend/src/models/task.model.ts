@@ -1,8 +1,8 @@
-import { DataTypes, Model } from 'sequelize'
+import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize'
 import sequelize from '../utils/database'
 
-class Task extends Model {
-  declare id: number
+class Task extends Model<InferAttributes<Task>, InferCreationAttributes<Task>> {
+  declare id: CreationOptional<number>
   declare user: string
   declare email: string
   declare description: string

@@ -15,3 +15,6 @@ export default {
   adminModel: Admin,
   taskModel: Task
 }
+
+export const adminModel = Admin
+export const taskModel = Task

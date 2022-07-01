@@ -1,10 +1,11 @@
-import { DataTypes, Model } from 'sequelize'
+import { CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize'
 import sequelize from '../utils/database'
 
-class Admin extends Model {
-  declare id: number
+class Admin extends Model<InferAttributes<Admin>, InferCreationAttributes<Admin>> {
+  declare id: CreationOptional<number>
   declare login: string
   declare password: string
+  declare salt: string
 }
 
 Admin.init({
@@ -20,6 +21,10 @@ Admin.init({
     unique: true
   },
   password: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  salt: {
     type: DataTypes.STRING,
     allowNull: false
   }

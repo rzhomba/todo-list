@@ -3,12 +3,12 @@ import { DotenvParseOutput } from 'dotenv'
 
 let env: DotenvParseOutput | typeof process.env
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'production') {
+  env = process.env
+} else if (process.env.NODE_ENV === 'development') {
   env = config({
     sample: './.env.sample'
   }).required
-} else if (process.env.NODE_ENV === 'production') {
-  env = process.env
 } else {
   throw new Error('Application is not configured properly')
 }
@@ -19,5 +19,6 @@ export default {
   dbHost: env.DB_HOST,
   dbName: env.DB_NAME,
   dbUser: env.DB_USER,
-  dbPass: env.DB_PASS
+  dbPass: env.DB_PASS,
+  jwtSecret: env.JWT_SECRET
 }
