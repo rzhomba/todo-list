@@ -13,6 +13,8 @@ const port = Env.applicationPort
 app.use(express.json())
 app.use(cors({
   origin: Env.corsOrigin,
+  allowedHeaders: ['Content-Type'],
+  methods: ['GET', 'POST', 'PUT'],
   credentials: true,
   optionsSuccessStatus: 200
 }))
