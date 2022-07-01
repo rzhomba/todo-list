@@ -4,12 +4,12 @@ import {
   EditTaskRequest,
   MarkTaskRequest,
   TasksRequest,
-  TasksResponse,
-  SortBy, SortDir
+  TaskListResponse,
+  SortBy, SortDir, TaskResponse
 } from '../types/request.types'
 import { taskService } from '../services/task.service'
 
-export const getTasks = async (req: TasksRequest, res: TasksResponse, next: NextFunction) => {
+export const getTasks = async (req: TasksRequest, res: TaskListResponse, next: NextFunction) => {
   const sortBy = req.query.sortBy ?? 'name' as SortBy
   const sortDir = req.query.sortDir ?? 'ascending' as SortDir
 
@@ -17,17 +17,25 @@ export const getTasks = async (req: TasksRequest, res: TasksResponse, next: Next
   const limit = Number(req.query.limit ?? '3')
 
   const tasks = await taskService.list(sortBy, sortDir, offset, limit)
+  const total = await taskService.count()
 
-  res.status(200).send(tasks)
+  res.status(200).send({
+    tasks,
+    total
+  })
   next()
 }
 
-export const createTask = async (req: CreateTaskRequest, res: Response, next: NextFunction) => {
+export const createTask = async (req: CreateTaskRequest, res: TaskResponse, next: NextFunction) => {
   const { user, email, description } = req.body
 
-  await taskService.create(user, email, description)
+  const task = await taskService.create(user, email, description)
+  const total = await taskService.count()
 
-  res.status(200).send()
+  res.status(200).send({
+    task,
+    total
+  })
   next()
 }
 

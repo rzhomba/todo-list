@@ -22,8 +22,13 @@ export interface AuthRequest extends Request {
 
 export interface AuthResponse extends BaseResponse<AuthData> {}
 
-interface TasksData {
+interface TaskListData {
   tasks: Task[]
+  total: number
+}
+
+interface TaskData {
+  task: Task
   total: number
 }
 
@@ -39,7 +44,9 @@ export interface TasksRequest extends Request {
   }
 }
 
-export interface TasksResponse extends BaseResponse<TasksData> {}
+export interface TaskResponse extends BaseResponse<TaskData> {}
+
+export interface TaskListResponse extends BaseResponse<TaskListData> {}
 
 export interface CreateTaskRequest extends Request {
   body: {
