@@ -22,7 +22,10 @@ export class TaskService {
     return await taskModel.findAll({
       limit,
       offset: offset * limit,
-      order: [[by, dir]]
+      order: [
+        [by, dir],
+        ['id', 'ASC']
+      ]
     })
   }
 
