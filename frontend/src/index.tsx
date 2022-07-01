@@ -8,6 +8,7 @@ import config from '../config.json'
 
 axios.defaults.baseURL = config.apiUrl
 axios.defaults.headers.post['Content-Type'] = 'application/json'
+axios.defaults.headers.get['Content-Type'] = 'application/json'
 axios.defaults.withCredentials = true
 
 const container = document.getElementById('root')

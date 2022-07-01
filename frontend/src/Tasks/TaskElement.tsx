@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react'
-import { Task } from '../types/task'
+import { Task } from './taskTypes'
 import './TaskElement.css'
 
 const TaskElement = (props: Task) => {

@@ -7,14 +7,12 @@ import 'normalize.css'
 
 const App = () => {
   return (
-    <React.StrictMode>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<TaskPage/>}/>
-          <Route path="/auth" element={<AuthPage/>}/>
-        </Routes>
-      </BrowserRouter>
-    </React.StrictMode>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<TaskPage/>}/>
+        <Route path="/auth" element={<AuthPage/>}/>
+      </Routes>
+    </BrowserRouter>
   )
 }
 

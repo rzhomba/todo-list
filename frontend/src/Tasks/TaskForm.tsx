@@ -1,11 +1,7 @@
 import React, { useState } from 'react'
 import './TaskForm.css'
-import { useAppDispatch } from '../hooks'
-import { addTask } from './taskSlice'
 
 const TaskForm = () => {
-  const dispatch = useAppDispatch()
-
   const [isFormVisible, setFormVisibility] = useState(false)
 
   const handleAddClick = () => {
@@ -28,13 +24,6 @@ const TaskForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    dispatch(addTask({
-      id: Math.random().toString(),
-      user,
-      email,
-      description,
-      completed: false
-    }))
   }
 
   const addBtnText = isFormVisible ? 'Cancel' : 'Add new task'

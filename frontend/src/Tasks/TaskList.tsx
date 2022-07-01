@@ -1,41 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
+import { useAppSelector, useAppDispatch } from '../hooks'
 import TaskElement from './TaskElement'
-import { Task } from '../types/task'
 import './TaskList.css'
+import { clearTasks, fetchTasks, selectTask } from './taskSlice'
+import { store } from '../store'
 
 const TaskList = () => {
-  const [tasks, setTasks] = useState<Task[]>([])
+  const { tasks } = useAppSelector(selectTask)
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
-    const data = [{
-      id: '1',
-      user: 'test',
-      email: 'test@test.com',
-      description: 'sample task',
-      completed: false
-    }, {
-      id: '2',
-      user: 'test',
-      email: 'test@test.com',
-      description: 'sample task 2',
-      completed: false
-    }, {
-      id: '3',
-      user: 'test',
-      email: 'test@test.com',
-      description: 'sample task 3',
-      completed: true
-    }, {
-      id: '4',
-      user: 'test',
-      email: 'test@test.com',
-      description: 'sample task 4',
-      completed: false
-    }]
+    store.dispatch(fetchTasks())
 
-    setTasks(data)
-
-    return () => setTasks([])
+    return () => {
+      dispatch(clearTasks())
+    }
   }, [])
 
   return (

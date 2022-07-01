@@ -1,9 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 import taskReducer from './Tasks/taskSlice'
+import sortSlice from './Sorting/sortSlice'
+import paginationSlice from './Pagination/paginationSlice'
+import authSlice from './Auth/authSlice'
 
 export const store = configureStore({
   reducer: {
-    task: taskReducer
+    task: taskReducer,
+    sort: sortSlice,
+    pagination: paginationSlice,
+    auth: authSlice
   }
 })
 
