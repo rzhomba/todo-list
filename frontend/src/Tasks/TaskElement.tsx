@@ -1,46 +1,47 @@
-import React, { useState, useCallback } from 'react'
-import { useAppSelector } from '../hooks'
+import React, { useCallback } from 'react'
+import { useAppSelector, useAppDispatch } from '../hooks'
+import { markTask, editTask, setEditDescription, setEditId } from './taskSlice'
 import { selectAuth } from '../Auth/authSlice'
 import { Task } from './taskTypes'
 import './TaskElement.css'
 
-const TaskElement = (props: Task) => {
+interface TaskElementProps extends Task {
+  editing: boolean
+}
+
+const TaskElement = (props: TaskElementProps) => {
   const { loggedIn } = useAppSelector(selectAuth)
+  const dispatch = useAppDispatch()
 
-  const [completed, setCompleted] = useState(false)
-  const [editing, setEditing] = useState(false)
-  const [editContent, setEditContent] = useState<string | undefined>()
-
-  // const editInputRef = createRef<HTMLInputElement>()
   const editInputRef = useCallback((node: HTMLTextAreaElement) => {
-    if (editing && node !== null) {
+    if (props.editing && node !== null) {
       node.value = props.description
     }
-  }, [editing])
+  }, [props.editing])
 
-  const handleStatusChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCompleted(e.target.checked)
+  const handleStatusChange = () => {
+    dispatch(markTask(props.id))
   }
   const handleEditClick = () => {
-    setEditing(!editing)
-    setEditContent(props.description)
+    dispatch(setEditId(props.id))
+    dispatch(setEditDescription(props.description))
   }
   const handleEditTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setEditContent(e.target.value)
+    dispatch(setEditDescription(e.target.value))
   }
   const handleEditSave = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    alert(editing)
+    dispatch(editTask())
   }
 
-  const editBtnText = editing ? 'cancel' : 'edit'
+  const editBtnText = props.editing ? 'cancel' : 'edit'
 
   return (
     <div className="task-wrapper">
       <div className="task-status">
-        <input className={editing || !loggedIn ? 'hidden' : ''}
+        <input className={props.editing || !loggedIn ? 'hidden' : ''}
                type="checkbox"
-               checked={completed}
+               checked={props.completed}
                onChange={handleStatusChange}/>
       </div>
       <div className="task">
@@ -52,10 +53,10 @@ const TaskElement = (props: Task) => {
             {editBtnText}
           </button>
         </div>
-        <div className={`task-text ${editing ? 'hidden' : ''}`}>
+        <div className={`task-text ${props.editing ? 'hidden' : ''}`}>
           {props.description}
         </div>
-        <form className={`task-edit-form ${!editing ? 'hidden' : ''}`}
+        <form className={`task-edit-form ${!props.editing ? 'hidden' : ''}`}
               onSubmit={handleEditSave}>
           <textarea className="task-edit-textarea"
                     ref={editInputRef}

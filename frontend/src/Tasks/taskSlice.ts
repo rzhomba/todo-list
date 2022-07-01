@@ -68,7 +68,11 @@ const taskSlice = createSlice({
       state.addTaskForm = initialState.addTaskForm
     },
     setEditId: (state, action: PayloadAction<number>) => {
-      state.editTaskForm.id = action.payload
+      if (state.editTaskForm.id === action.payload) {
+        state.editTaskForm.id = initialState.editTaskForm.id
+      } else {
+        state.editTaskForm.id = action.payload
+      }
     },
     setEditDescription: (state, action: PayloadAction<string>) => {
       state.editTaskForm.description = action.payload
@@ -87,6 +91,8 @@ export const {
   setAddFormEmail,
   setAddFormDescription,
   clearAddForm,
+  setEditId,
+  setEditDescription,
   clearEditForm
 } = taskSlice.actions
 
@@ -171,7 +177,7 @@ export const markTask = (id: number): AppThunk =>
     const completed = task.completed
 
     const { status } = await axios.put(`task/mark/${task.id}`, {
-      completed
+      completed: !completed
     })
 
     if (status === 200) {
@@ -180,7 +186,7 @@ export const markTask = (id: number): AppThunk =>
         user: task.user,
         email: task.email,
         description: task.description,
-        completed
+        completed: !completed
       }))
     }
   }

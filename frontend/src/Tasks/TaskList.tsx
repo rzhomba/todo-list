@@ -6,7 +6,7 @@ import { clearTasks, fetchTasks, selectTask } from './taskSlice'
 import { store } from '../store'
 
 const TaskList = () => {
-  const { tasks } = useAppSelector(selectTask)
+  const { tasks, editTaskForm } = useAppSelector(selectTask)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -25,7 +25,8 @@ const TaskList = () => {
                      user={task.user}
                      email={task.email}
                      description={task.description}
-                     completed={task.completed}/>
+                     completed={task.completed}
+                     editing={task.id === editTaskForm.id}/>
       ))}
     </div>
   )
