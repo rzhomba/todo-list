@@ -48,11 +48,11 @@ export class TaskService {
       throw new Error(`Task #${taskId} not found.`)
     }
 
-    if (description) {
+    if (description !== undefined) {
       task.description = description
     }
 
-    if (completed) {
+    if (completed !== undefined) {
       task.completed = completed
     }
 
