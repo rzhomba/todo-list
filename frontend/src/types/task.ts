@@ -2,6 +2,6 @@ export interface Task {
   id: string
   user: string
   email: string
-  text: string
+  description: string
   completed: boolean
 }

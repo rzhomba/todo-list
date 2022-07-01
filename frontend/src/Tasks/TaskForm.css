@@ -1,0 +1,32 @@
+.form-wrapper {
+  margin-bottom: 24px;
+}
+
+.form-add {
+  display: block;
+  width: 80%;
+  margin: auto;
+  padding: 10px 0;
+}
+
+.form {
+  padding: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 10px;
+  overflow: hidden;
+  transition: 0.1s;
+}
+
+.form-hidden {
+  display: none;
+}
+
+.form-textarea {
+  resize: vertical;
+}
+
+.form-submit {
+  align-self: center;
+  padding: 10px 20px;
+}

@@ -1,0 +1,11 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: #333 1px solid;
+  margin-bottom: 20px;
+}
+
+.header-title {
+  text-align: center;
+}

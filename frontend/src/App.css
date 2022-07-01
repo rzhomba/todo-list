@@ -6,3 +6,41 @@
 body {
   font-family: Montserrat, sans-serif;
 }
+
+button {
+  border: none;
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+button:hover {
+  filter: brightness(90%);
+}
+
+button:active {
+  filter: brightness(80%);
+}
+
+input,
+textarea {
+  border: none;
+  border-bottom: #333 2px solid;
+  padding: 6px;
+  outline: none;
+}
+
+#root {
+  max-width: 360px;
+  margin: auto;
+}
+
+.button-active {
+  background: #fff;
+  color: #333;
+}
+
+.hidden {
+  display: none !important;
+}

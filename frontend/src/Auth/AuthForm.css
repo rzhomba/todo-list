@@ -1,0 +1,10 @@
+.auth-form {
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 10px;
+  gap: 10px;
+}
+
+.auth-submit {
+  padding: 10px 20px;
+}

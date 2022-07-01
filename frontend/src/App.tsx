@@ -1,15 +1,20 @@
 import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import TaskPage from './Pages/TaskPage'
+import AuthPage from './Pages/AuthPage'
 import './App.css'
-import Header from './Header'
-import TaskList from './Task/TaskList'
 import 'normalize.css'
 
 const App = () => {
   return (
-    <div>
-      <Header/>
-      <TaskList/>
-    </div>
+    <React.StrictMode>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<TaskPage/>}/>
+          <Route path="/auth" element={<AuthPage/>}/>
+        </Routes>
+      </BrowserRouter>
+    </React.StrictMode>
   )
 }
 

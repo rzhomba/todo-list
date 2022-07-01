@@ -1,0 +1,9 @@
+.page-element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  flex: 0 0 32px;
+  height: 32px;
+  border-radius: 32px;
+}

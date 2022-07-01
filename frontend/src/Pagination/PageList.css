@@ -1,0 +1,12 @@
+.page-list {
+  padding: 0 10%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.page-list .page-element:first-child,
+.page-list .page-element:last-child {
+  margin: 0 10px;
+}

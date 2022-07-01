@@ -4,10 +4,12 @@ import { Task } from '../types/task'
 
 interface TaskState {
   tasks: Task[]
+  page: number
 }
 
 const initialState: TaskState = {
-  tasks: []
+  tasks: [],
+  page: 1
 }
 
 const taskSlice = createSlice({
@@ -26,15 +28,14 @@ const taskSlice = createSlice({
     markTask: (state, action: PayloadAction<{ id: string, completed: boolean }>) => {
       // TODO: mark the task
     },
-    removeTask: (state, action: PayloadAction<string>) => {
-      state.tasks = state.tasks.filter(task => task.id !== action.payload)
+    setPage: (state, action: PayloadAction<number>) => {
+      state.page = action.payload
     }
   }
 })
 
-export const { initialize, addTask, editTask, markTask, removeTask } = taskSlice.actions
+export const { initialize, addTask, editTask, markTask, setPage } = taskSlice.actions
 
-// Other code such as selectors can use the imported `RootState` type
-export const selectCount = (state: RootState) => state.counter.value
+export const selectTask = (state: RootState) => state.task
 
 export default taskSlice.reducer

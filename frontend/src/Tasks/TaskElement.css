@@ -1,0 +1,54 @@
+.task-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.task-status {
+  display: flex;
+  align-items: center;
+  width: 38px;
+  flex-shrink: 0;
+}
+
+.task {
+  padding: 10px 0;
+}
+
+.task-user {
+  font-weight: 500;
+}
+
+.task-email {
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.task-edit {
+  background: none;
+  color: #000;
+  font-weight: 600;
+  font-size: 14px;
+  margin-left: 12px;
+}
+
+.task-text {
+  text-align: justify;
+  margin-top: 10px;
+}
+
+.task-edit-form {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.task-edit-textarea {
+  margin-top: 10px;
+  resize: vertical;
+}
+
+.task-edit-submit {
+  align-self: start;
+  padding: 5px 10px;
+  margin-top: 5px;
+}

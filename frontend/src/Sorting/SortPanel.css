@@ -1,0 +1,33 @@
+.sort {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.sort-label {
+  margin: 4px 0;
+  cursor: default;
+}
+
+.sort-by {
+  background: none;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+.sort-by::after {
+  position: absolute;
+  content: "";
+  left: 0;
+}
+
+.sort-dir {
+  background: none;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
