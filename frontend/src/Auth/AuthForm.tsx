@@ -1,18 +1,23 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useAppDispatch } from '../hooks'
+import { setLogin, setPassword, signIn } from './authSlice'
+import { useNavigate } from 'react-router-dom'
 import './AuthForm.css'
 
 const AuthForm = () => {
-  const [login, setLogin] = useState('')
-  const [password, setPassword] = useState('')
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLogin(e.target.value)
+    dispatch(setLogin(e.target.value))
   }
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value)
+    dispatch(setPassword(e.target.value))
   }
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    dispatch(signIn())
+    navigate('/')
   }
 
   return (

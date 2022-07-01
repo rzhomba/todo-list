@@ -1,8 +1,12 @@
 import React, { useState, useCallback } from 'react'
+import { useAppSelector } from '../hooks'
+import { selectAuth } from '../Auth/authSlice'
 import { Task } from './taskTypes'
 import './TaskElement.css'
 
 const TaskElement = (props: Task) => {
+  const { loggedIn } = useAppSelector(selectAuth)
+
   const [completed, setCompleted] = useState(false)
   const [editing, setEditing] = useState(false)
   const [editContent, setEditContent] = useState<string | undefined>()
@@ -34,20 +38,31 @@ const TaskElement = (props: Task) => {
   return (
     <div className="task-wrapper">
       <div className="task-status">
-        <input type="checkbox" checked={completed} onChange={handleStatusChange} className={editing ? 'hidden' : ''}/>
+        <input className={editing || !loggedIn ? 'hidden' : ''}
+               type="checkbox"
+               checked={completed}
+               onChange={handleStatusChange}/>
       </div>
       <div className="task">
         <div>
           <span className="task-user">{props.user}</span>
           <span className="task-email">{props.email}</span>
-          <button className="task-edit" onClick={handleEditClick}>
+          <button className={`task-edit ${!loggedIn ? 'hidden' : ''}`}
+                  onClick={handleEditClick}>
             {editBtnText}
           </button>
         </div>
-        <div className={`task-text ${editing ? 'hidden' : ''}`}>{props.description}</div>
-        <form className={`task-edit-form ${!editing ? 'hidden' : ''}`} onSubmit={handleEditSave}>
-          <textarea className="task-edit-textarea" ref={editInputRef} onChange={handleEditTextareaChange}/>
-          <button className="task-edit-submit" type="submit">Save</button>
+        <div className={`task-text ${editing ? 'hidden' : ''}`}>
+          {props.description}
+        </div>
+        <form className={`task-edit-form ${!editing ? 'hidden' : ''}`}
+              onSubmit={handleEditSave}>
+          <textarea className="task-edit-textarea"
+                    ref={editInputRef}
+                    onChange={handleEditTextareaChange}/>
+          <button className="task-edit-submit" type="submit">
+            Save
+          </button>
         </form>
       </div>
     </div>

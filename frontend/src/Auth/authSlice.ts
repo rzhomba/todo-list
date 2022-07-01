@@ -39,13 +39,10 @@ const authSlice = createSlice({
 })
 
 export const {
+  setLoggedIn,
   setLogin,
   setPassword,
   clearAuthForm
-} = authSlice.actions
-
-const {
-  setLoggedIn
 } = authSlice.actions
 
 export const signIn = (): AppThunk =>
@@ -59,6 +56,7 @@ export const signIn = (): AppThunk =>
     if (status === 200) {
       dispatch(setLoggedIn(true))
       dispatch(clearAuthForm())
+      localStorage.setItem('authenticated', 'true')
     } else if (status === 401) {
       dispatch(clearAuthForm())
     }
@@ -69,6 +67,7 @@ export const signOut = (): AppThunk =>
     const { status } = await axios.delete('auth/')
     if (status === 200) {
       dispatch(setLoggedIn(false))
+      localStorage.setItem('authenticated', 'false')
     }
   }
 
