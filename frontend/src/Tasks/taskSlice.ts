@@ -8,6 +8,7 @@ import axios from 'axios'
 interface TaskState {
   tasks: Task[]
   addTaskForm: {
+    formVisible: boolean
     user: string
     email: string
     description: string
@@ -21,6 +22,7 @@ interface TaskState {
 const initialState: TaskState = {
   tasks: [],
   addTaskForm: {
+    formVisible: false,
     user: '',
     email: '',
     description: ''
@@ -50,13 +52,16 @@ const taskSlice = createSlice({
     clearTasks: (state) => {
       state.tasks = initialState.tasks
     },
-    setUser: (state, action: PayloadAction<string>) => {
+    setAddFormVisibility: (state, action: PayloadAction<boolean>) => {
+      state.addTaskForm.formVisible = action.payload
+    },
+    setAddFormUser: (state, action: PayloadAction<string>) => {
       state.addTaskForm.user = action.payload
     },
-    setEmail: (state, action: PayloadAction<string>) => {
+    setAddFormEmail: (state, action: PayloadAction<string>) => {
       state.addTaskForm.email = action.payload
     },
-    setDescription: (state, action: PayloadAction<string>) => {
+    setAddFormDescription: (state, action: PayloadAction<string>) => {
       state.addTaskForm.description = action.payload
     },
     clearAddForm: (state) => {
@@ -77,9 +82,10 @@ const taskSlice = createSlice({
 export const {
 
   clearTasks,
-  setUser,
-  setEmail,
-  setDescription,
+  setAddFormVisibility,
+  setAddFormUser,
+  setAddFormEmail,
+  setAddFormDescription,
   clearAddForm,
   clearEditForm
 } = taskSlice.actions

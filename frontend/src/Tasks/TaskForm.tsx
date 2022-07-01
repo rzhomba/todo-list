@@ -1,39 +1,46 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useAppSelector, useAppDispatch } from '../hooks'
 import './TaskForm.css'
+import {
+  createTask,
+  selectTask,
+  setAddFormDescription,
+  setAddFormEmail,
+  setAddFormUser,
+  setAddFormVisibility
+} from './taskSlice'
 
 const TaskForm = () => {
-  const [isFormVisible, setFormVisibility] = useState(false)
+  const { formVisible } = useAppSelector(selectTask).addTaskForm
+  const dispatch = useAppDispatch()
 
   const handleAddClick = () => {
-    setFormVisibility(!isFormVisible)
+    dispatch(setAddFormVisibility(!formVisible))
   }
-
-  const [user, setUser] = useState('')
-  const [email, setEmail] = useState('')
-  const [description, setDescription] = useState('')
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUser(e.target.value)
+    dispatch(setAddFormUser(e.target.value))
   }
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value)
+    dispatch(setAddFormEmail(e.target.value))
   }
   const handleTaskChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setDescription(e.target.value)
+    dispatch(setAddFormDescription(e.target.value))
   }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    dispatch(createTask())
   }
 
-  const addBtnText = isFormVisible ? 'Cancel' : 'Add new task'
+  const addBtnText = formVisible ? 'Cancel' : 'Add new task'
 
   return (
     <div className="form-wrapper">
-      <button className={`form-add ${isFormVisible ? 'button-active' : ''}`} onClick={handleAddClick}>
+      <button className={`form-add ${formVisible ? 'button-active' : ''}`} onClick={handleAddClick}>
         {addBtnText}
       </button>
-      <form className={`form ${!isFormVisible ? 'form-hidden' : ''}`} onSubmit={handleSubmit}>
+      <form className={`form ${!formVisible ? 'form-hidden' : ''}`} onSubmit={handleSubmit}>
         <input type="text" placeholder="Name" onChange={handleNameChange}/>
         <input type="email" placeholder="E-Mail" onChange={handleEmailChange}/>
         <textarea className="form-textarea" placeholder="Task" onChange={handleTaskChange}/>
