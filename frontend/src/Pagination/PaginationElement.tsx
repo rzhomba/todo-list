@@ -1,14 +1,14 @@
 import React from 'react'
 import { useAppDispatch } from '../hooks'
 import { setPage } from './paginationSlice'
-import './PageElement.css'
+import './PaginationElement.css'
 
 interface PageElementProps {
   index: number
   current: boolean
 }
 
-const PageElement = (props: PageElementProps) => {
+const PaginationElement = (props: PageElementProps) => {
   const dispatch = useAppDispatch()
 
   const handleClick = () => {
@@ -23,4 +23,4 @@ const PageElement = (props: PageElementProps) => {
   )
 }
 
-export default PageElement
+export default PaginationElement

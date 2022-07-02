@@ -5,21 +5,21 @@ import Header from '../Header/Header'
 import TaskForm from '../Tasks/TaskForm'
 import SortPanel from '../Sorting/SortPanel'
 import TaskList from '../Tasks/TaskList'
-import PageList from '../Pagination/PageList'
-import SignIn from '../Header/SignIn'
-import SignOut from '../Header/SignOut'
+import Pagination from '../Pagination/Pagination'
+import SignInBtn from '../Header/SignInBtn'
+import SignOutBtn from '../Header/SignOutBtn'
 
 const TaskPage = () => {
   const { loggedIn } = useAppSelector(selectAuth)
 
-  const button = loggedIn ? <SignOut/> : <SignIn/>
+  const button = loggedIn ? <SignOutBtn/> : <SignInBtn/>
 
   return <div>
     <Header button={button}/>
     <TaskForm/>
     <SortPanel/>
     <TaskList/>
-    <PageList/>
+    <Pagination/>
   </div>
 }
 

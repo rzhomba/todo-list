@@ -1,12 +1,12 @@
 import React from 'react'
 import AuthForm from '../Auth/AuthForm'
 import Header from '../Header/Header'
-import SignCancel from '../Header/SignCancel'
+import SignCancelBtn from '../Header/SignCancelBtn'
 
 const AuthPage = () => {
   return (
     <div>
-      <Header button={<SignCancel/>}/>
+      <Header button={<SignCancelBtn/>}/>
       <AuthForm/>
     </div>
   )

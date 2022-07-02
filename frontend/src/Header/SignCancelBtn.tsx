@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import './Sign.css'
+import './SignBtn.css'
 
-const SignCancel = () => {
+const SignCancelBtn = () => {
   return (
     <Link to="/">
       <button className="sign-cancel">
@@ -12,4 +12,4 @@ const SignCancel = () => {
   )
 }
 
-export default SignCancel
+export default SignCancelBtn

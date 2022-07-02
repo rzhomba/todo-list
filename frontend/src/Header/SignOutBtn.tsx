@@ -1,9 +1,9 @@
 import React from 'react'
 import { useAppDispatch } from '../hooks'
 import { signOut } from '../Auth/authSlice'
-import './Sign.css'
+import './SignBtn.css'
 
-const SignOut = () => {
+const SignOutBtn = () => {
   const dispatch = useAppDispatch()
 
   const handleClick = () => {
@@ -17,4 +17,4 @@ const SignOut = () => {
   )
 }
 
-export default SignOut
+export default SignOutBtn
