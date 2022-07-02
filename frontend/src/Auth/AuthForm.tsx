@@ -1,13 +1,11 @@
-import React, { useCallback, useLayoutEffect } from 'react'
+import React, { useCallback } from 'react'
 import { useAppSelector, useAppDispatch } from '../hooks'
 import { selectAuth, setLogin, setPassword, signIn } from './authSlice'
-import { useNavigate } from 'react-router-dom'
 import './AuthForm.css'
 
 const AuthForm = () => {
-  const { loggedIn, authForm } = useAppSelector(selectAuth)
+  const { authForm } = useAppSelector(selectAuth)
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
 
   const loginInputRef = useCallback((node: HTMLInputElement) => {
     if (node !== null) {
@@ -30,12 +28,6 @@ const AuthForm = () => {
     e.preventDefault()
     dispatch(signIn())
   }
-
-  useLayoutEffect(() => {
-    if (loggedIn) {
-      navigate('/')
-    }
-  }, [loggedIn])
 
   return (
     <form className="auth-form" onSubmit={handleSubmit}>

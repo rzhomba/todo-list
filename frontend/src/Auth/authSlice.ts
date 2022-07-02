@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { showSuccess, showWarning } from '../Nofification/notificationSlice'
 import { RootState } from '../store'
 import { AppThunk } from '../appThunk'
 import axios from 'axios'
-import { showWarning } from '../Nofification/notificationSlice'
 
 interface AuthState {
   loggedIn: boolean,
@@ -55,6 +55,7 @@ export const signIn = (): AppThunk =>
         password
       })
       dispatch(setLoggedIn(true))
+      dispatch(showSuccess('Authenticated successfully.'))
       localStorage.setItem('authenticated', 'true')
     } catch {
       dispatch(showWarning('Invalid authentication credentials.'))

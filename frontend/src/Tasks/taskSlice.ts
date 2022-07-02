@@ -166,16 +166,19 @@ export const editTask = (): AppThunk =>
       return
     }
 
-    await axios.put(`task/edit/${task.id}`, {
-      description
-    })
-
-    dispatch(updateTask({
-      id: task.id,
-      description,
-      completed: task.completed
-    }))
-    dispatch(clearEditForm())
+    try {
+      await axios.put(`task/edit/${task.id}`, {
+        description
+      })
+      dispatch(updateTask({
+        id: task.id,
+        description,
+        completed: task.completed
+      }))
+      dispatch(clearEditForm())
+    } catch {
+      dispatch(showWarning('Sign in in order to do this.'))
+    }
   }
 
 export const markTask = (id: number): AppThunk =>
@@ -188,15 +191,18 @@ export const markTask = (id: number): AppThunk =>
 
     const completed = task.completed
 
-    await axios.put(`task/mark/${task.id}`, {
-      completed: !completed
-    })
-
-    dispatch(updateTask({
-      id: task.id,
-      description: task.description,
-      completed: !completed || task.completed
-    }))
+    try {
+      await axios.put(`task/mark/${task.id}`, {
+        completed: !completed
+      })
+      dispatch(updateTask({
+        id: task.id,
+        description: task.description,
+        completed: !completed || task.completed
+      }))
+    } catch {
+      dispatch(showWarning('Sign in in order to do this.'))
+    }
   }
 
 export const selectTask = (state: RootState) => state.task
