@@ -18,7 +18,7 @@ const paginationSlice = createSlice({
   initialState,
   reducers: {
     setPagesTotal: (state, action: PayloadAction<number>) => {
-      state.pagesTotal = action.payload
+      state.pagesTotal = Math.max(action.payload, 1)
     },
     setCurrentPage: (state, action: PayloadAction<number>) => {
       if (action.payload >= 0 && action.payload < state.pagesTotal) {

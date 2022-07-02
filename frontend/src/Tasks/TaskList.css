@@ -3,3 +3,10 @@
   border-bottom: var(--dark) 1px solid;
   margin-bottom: 20px;
 }
+
+.tasks-empty {
+  text-align: center;
+  font-size: 18px;
+  color: var(--dark);
+  margin: 20px;
+}

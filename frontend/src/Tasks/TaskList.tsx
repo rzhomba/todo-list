@@ -29,6 +29,9 @@ const TaskList = () => {
                      edited={task.edited}
                      editing={task.id === editTaskForm.id}/>
       ))}
+      <p className={`tasks-empty ${tasks.length > 0 ? 'hidden' : ''}`}>
+        Task list is currently empty.
+      </p>
     </div>
   )
 }
