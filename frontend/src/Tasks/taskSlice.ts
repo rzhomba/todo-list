@@ -84,7 +84,6 @@ const taskSlice = createSlice({
 })
 
 export const {
-
   clearTasks,
   setAddFormVisibility,
   setAddFormUser,
@@ -110,14 +109,14 @@ export const fetchTasks = (): AppThunk =>
       params: {
         sortBy,
         sortDir,
-        page: currentPage
+        offset: currentPage
       }
     })
 
     if (status === 200) {
       dispatch(clearTasks())
       dispatch(setTasks(data.tasks))
-      dispatch(setPagesTotal(Math.trunc(data.total / 3)))
+      dispatch(setPagesTotal(Math.ceil(data.total / 3)))
     }
   }
 
@@ -132,7 +131,7 @@ export const createTask = (): AppThunk =>
 
     if (status === 200) {
       dispatch(addTask(data.task))
-      dispatch(setPagesTotal(Math.trunc(data.total / 3)))
+      dispatch(setPagesTotal(Math.ceil(data.total / 3)))
       dispatch(clearAddForm())
     }
   }

@@ -1,11 +1,18 @@
 import React from 'react'
+import { useAppSelector } from '../hooks'
+import { selectPagination } from './paginationSlice'
 import PageElement from './PageElement'
 import './PageList.css'
 
 const PageList = () => {
-  const pages = [1, 4, 5, 6, 7, 8, 12].map(p => (
-    <PageElement index={p} key={`page-${p}`}/>
-  ))
+  const { currentPage, pagesTotal } = useAppSelector(selectPagination)
+
+  const pages: React.ReactNode[] = []
+  let counter = 0
+  while (counter < pagesTotal) {
+    pages.push((<PageElement index={counter} current={counter === currentPage} key={`page-${counter}`}/>))
+    counter++
+  }
 
   return (
     <div className="page-list">
