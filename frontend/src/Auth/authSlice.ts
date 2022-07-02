@@ -53,12 +53,12 @@ export const signIn = (): AppThunk =>
       password
     })
 
+    dispatch(clearAuthForm())
+
     if (status === 200) {
       dispatch(setLoggedIn(true))
-      dispatch(clearAuthForm())
       localStorage.setItem('authenticated', 'true')
     } else if (status === 401) {
-      dispatch(clearAuthForm())
     }
   }
 
