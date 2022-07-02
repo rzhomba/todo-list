@@ -25,7 +25,7 @@
 
 .task-edit {
   background: none;
-  color: #000;
+  color: var(--black);
   font-weight: 600;
   font-size: 14px;
   margin-left: 12px;
@@ -60,12 +60,12 @@
 
 .task-status {
   font-weight: 600;
-  color: #333;
+  color: var(--dark);
   margin-left: 8px;
 }
 
 .task-status-completed {
-  color: #77d91f;
+  color: var(--green);
 }
 
 .task-edited {

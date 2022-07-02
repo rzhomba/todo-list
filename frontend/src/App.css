@@ -1,3 +1,11 @@
+:root {
+  --black: #000;
+  --white: #fff;
+  --dark: #333;
+  --red: #d72b26;
+  --green: #77d91f;
+}
+
 @font-face {
   font-family: Montserrat;
   src: url("../public/fonts/Montserrat/Montserrat-VariableFont_wght.ttf") format("truetype");
@@ -9,8 +17,8 @@ body {
 
 button {
   border: none;
-  background: #333;
-  color: #fff;
+  background: var(--dark);
+  color: var(--white);
   cursor: pointer;
   transition: 0.15s;
 }
@@ -26,7 +34,7 @@ button:active {
 input,
 textarea {
   border: none;
-  border-bottom: #333 2px solid;
+  border-bottom: var(--dark) 2px solid;
   padding: 6px;
   outline: none;
 }
@@ -38,8 +46,8 @@ textarea {
 }
 
 .button-active {
-  background: #fff;
-  color: #333;
+  background: var(--white);
+  color: var(--dark);
 }
 
 .hidden {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import './SignCancel.css'
+import './Sign.css'
 
 const SignCancel = () => {
   return (

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAppDispatch } from '../hooks'
-import './SignOut.css'
 import { signOut } from '../Auth/authSlice'
+import './Sign.css'
 
 const SignOut = () => {
   const dispatch = useAppDispatch()

@@ -1,0 +1,16 @@
+.sign-in,
+.sign-out,
+.sign-cancel {
+  padding: 10px 20px;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.sign-in {
+  background-color: var(--green);
+}
+
+.sign-out,
+.sign-cancel {
+  background-color: var(--red);
+}

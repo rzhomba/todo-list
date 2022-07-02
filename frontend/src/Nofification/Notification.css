@@ -1,8 +1,8 @@
 .notification {
   position: absolute;
   top: 90vh;
-  color: #333;
-  background: #fff;
+  color: var(--dark);
+  background: var(--white);
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
@@ -22,9 +22,9 @@
 }
 
 .notification-success {
-  border: #77d91f 2px solid;
+  border: var(--green) 2px solid;
 }
 
 .notification-warning {
-  border: #d72b26 2px solid;
+  border: var(--red) 2px solid;
 }

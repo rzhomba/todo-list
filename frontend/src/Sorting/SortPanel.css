@@ -26,7 +26,7 @@
 
 .sort-dir {
   background: none;
-  color: #333;
+  color: var(--dark);
   display: flex;
   justify-content: center;
   align-items: center;
