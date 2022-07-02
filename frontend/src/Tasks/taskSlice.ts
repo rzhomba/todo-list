@@ -3,8 +3,9 @@ import { RootState } from '../store'
 import { AppThunk } from '../appThunk'
 import { setPagesTotal } from '../Pagination/paginationSlice'
 import { Task, TaskListResponse, TaskResponse, TaskUpdate } from './taskTypes'
+import { showSuccess, showWarning } from '../Nofification/notificationSlice'
 import axios from 'axios'
-import { showSuccess } from '../Nofification/notificationSlice'
+import EmailValidator from 'email-validator'
 
 interface TaskState {
   tasks: Task[]
@@ -126,6 +127,14 @@ export const fetchTasks = (): AppThunk =>
 export const createTask = (): AppThunk =>
   async (dispatch, getState) => {
     const { user, email, description } = getState().task.addTaskForm
+    if (!EmailValidator.validate(email)) {
+      dispatch(showWarning('Specify valid email address.'))
+      return
+    } else if (user.length === 0 || description.length === 0) {
+      dispatch(showWarning('Task field cannot be empty.'))
+      return
+    }
+
     const taskCount = getState().task.tasks.length
     const { data } = await axios.post<TaskResponse>('task/', {
       user,

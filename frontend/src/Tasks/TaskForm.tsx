@@ -42,7 +42,7 @@ const TaskForm = () => {
       </button>
       <form className={`form ${!formVisible ? 'form-hidden' : ''}`} onSubmit={handleSubmit}>
         <input type="text" placeholder="Name" onChange={handleNameChange}/>
-        <input type="email" placeholder="E-Mail" onChange={handleEmailChange}/>
+        <input type="text" placeholder="E-Mail" onChange={handleEmailChange}/>
         <textarea className="form-textarea" placeholder="Task" onChange={handleTaskChange}/>
         <button className="form-submit" type="submit">Add task</button>
       </form>
