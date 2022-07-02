@@ -10,7 +10,7 @@ export const signIn = async (req: SignInRequest, res: Response, next: NextFuncti
   if (!login || !password) {
     const err = new Error('Login or password is missing.')
     res
-      .status(400)
+      .status(401)
       .send({
         error: err.toString()
       })
@@ -23,7 +23,7 @@ export const signIn = async (req: SignInRequest, res: Response, next: NextFuncti
   try {
     token = await authService.auth(login, password)
   } catch (err: any) {
-    res.status(400).send({
+    res.status(401).send({
       error: err.toString()
     })
     next(err)
