@@ -7,6 +7,7 @@ class Task extends Model<InferAttributes<Task>, InferCreationAttributes<Task>> {
   declare email: string
   declare description: string
   declare completed: boolean
+  declare edited: boolean
 }
 
 Task.init({
@@ -29,6 +30,11 @@ Task.init({
     allowNull: false
   },
   completed: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  edited: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: false

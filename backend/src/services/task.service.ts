@@ -38,7 +38,8 @@ export class TaskService {
       user,
       email,
       description,
-      completed: false
+      completed: false,
+      edited: false
     })
   }
 
@@ -50,6 +51,7 @@ export class TaskService {
 
     if (description !== undefined) {
       task.description = description
+      task.edited = true
     }
 
     if (completed !== undefined) {

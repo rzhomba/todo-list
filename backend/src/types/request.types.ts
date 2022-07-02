@@ -54,9 +54,6 @@ export interface MarkTaskRequest extends Request {
   query: {
     taskId: string
   }
-  body: {
-    completed: boolean
-  }
 }
 
 export interface EditTaskRequest extends Request {

@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../store'
 import { AppThunk } from '../appThunk'
 import { setPagesTotal } from '../Pagination/paginationSlice'
-import { Task, TaskListResponse, TaskResponse } from './taskTypes'
+import { Task, TaskListResponse, TaskResponse, TaskUpdate } from './taskTypes'
 import axios from 'axios'
 import { showSuccess } from '../Nofification/notificationSlice'
 
@@ -46,9 +46,13 @@ const taskSlice = createSlice({
         state.tasks.push(action.payload)
       }
     },
-    updateTask: (state, action: PayloadAction<Task>) => {
+    updateTask: (state, action: PayloadAction<TaskUpdate>) => {
       const index = state.tasks.findIndex(task => task.id === action.payload.id)
-      state.tasks[index] = action.payload
+      state.tasks[index] = {
+        ...state.tasks[index],
+        ...action.payload,
+        edited: true
+      }
     },
     clearTasks: (state) => {
       state.tasks = initialState.tasks
@@ -159,8 +163,6 @@ export const editTask = (): AppThunk =>
 
     dispatch(updateTask({
       id: task.id,
-      user: task.user,
-      email: task.email,
       description,
       completed: task.completed
     }))
@@ -183,10 +185,8 @@ export const markTask = (id: number): AppThunk =>
 
     dispatch(updateTask({
       id: task.id,
-      user: task.user,
-      email: task.email,
       description: task.description,
-      completed: !completed
+      completed: !completed || task.completed
     }))
   }
 

@@ -41,9 +41,8 @@ export const createTask = async (req: CreateTaskRequest, res: TaskResponse, next
 
 export const markTask = async (req: MarkTaskRequest, res: Response, next: NextFunction) => {
   const taskId = Number(req.params.taskId)
-  const { completed } = req.body
 
-  await taskService.update(taskId, undefined, completed)
+  await taskService.update(taskId, undefined, true)
 
   res.status(200).send()
   next()

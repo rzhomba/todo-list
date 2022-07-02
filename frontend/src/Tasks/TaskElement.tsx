@@ -34,28 +34,29 @@ const TaskElement = (props: TaskElementProps) => {
     dispatch(editTask())
   }
 
-  const editBtnText = props.editing ? 'cancel' : 'edit'
-
   return (
     <div className="task-wrapper">
-      <div className="task-status">
+      <div className="task-checkbox">
         <input className={props.editing || !loggedIn ? 'hidden' : ''}
                type="checkbox"
                checked={props.completed}
                onChange={handleStatusChange}/>
       </div>
+
       <div className="task">
         <div>
           <span className="task-user">{props.user}</span>
           <span className="task-email">{props.email}</span>
           <button className={`task-edit ${!loggedIn ? 'hidden' : ''}`}
                   onClick={handleEditClick}>
-            {editBtnText}
+            {props.editing ? 'cancel' : 'edit'}
           </button>
         </div>
+
         <div className={`task-text ${props.editing ? 'hidden' : ''}`}>
           {props.description}
         </div>
+
         <form className={`task-edit-form ${!props.editing ? 'hidden' : ''}`}
               onSubmit={handleEditSave}>
           <textarea className="task-edit-textarea"
@@ -65,6 +66,19 @@ const TaskElement = (props: TaskElementProps) => {
             Save
           </button>
         </form>
+
+        <div className="task-info">
+          <div>
+            Status:
+            <span className={`task-status ${props.completed ? 'task-status-completed' : ''}`}>
+              {props.completed ? 'completed' : 'pending'}
+            </span>
+          </div>
+
+          <div className={`task-edited ${!props.edited ? 'hidden' : ''}`}>
+            Edited by administrator
+          </div>
+        </div>
       </div>
     </div>
   )

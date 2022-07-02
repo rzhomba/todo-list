@@ -26,6 +26,7 @@ const TaskList = () => {
                      email={task.email}
                      description={task.description}
                      completed={task.completed}
+                     edited={task.edited}
                      editing={task.id === editTaskForm.id}/>
       ))}
     </div>

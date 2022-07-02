@@ -4,6 +4,13 @@ export interface Task {
   email: string
   description: string
   completed: boolean
+  edited: boolean
+}
+
+export interface TaskUpdate {
+  id: number
+  description: string
+  completed: boolean
 }
 
 export interface TaskListResponse {
@@ -15,11 +22,3 @@ export interface TaskResponse {
   task: Task
   total: number
 }
-//
-// export interface EditTaskRequest {
-//   description: string
-// }
-//
-// export interface MarkTaskRequest {
-//   completed: boolean
-// }
