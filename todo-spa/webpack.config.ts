@@ -30,7 +30,7 @@ export default {
     },
     port: 8080,
     devMiddleware: {
-      publicPath: `https://localhost:8080/dist/`
+      publicPath: 'https://localhost:8080/dist/'
     },
     hot: true
   }
