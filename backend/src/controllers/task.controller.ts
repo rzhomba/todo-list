@@ -8,6 +8,7 @@ import {
   SortBy, SortDir, TaskResponse
 } from '../types/request.types'
 import { taskService } from '../services/task.service'
+import EmailValidator from 'email-validator'
 
 export const getTasks = async (req: TasksRequest, res: TaskListResponse, next: NextFunction) => {
   const sortBy = req.query.sortBy ?? 'name' as SortBy
@@ -28,6 +29,18 @@ export const getTasks = async (req: TasksRequest, res: TaskListResponse, next: N
 
 export const createTask = async (req: CreateTaskRequest, res: TaskResponse, next: NextFunction) => {
   const { user, email, description } = req.body
+
+  if (user.length === 0 || email.length === 0 || description.length === 0) {
+    const err = new Error('Task fields cannot be empty.')
+    res.status(400).send({ error: err })
+    next(err)
+    return
+  } else if (!EmailValidator.validate(email)) {
+    const err = new Error('Specify valid email address.')
+    res.status(400).send({ error: err })
+    next(err)
+    return
+  }
 
   const task = await taskService.create(user, email, description)
   const total = await taskService.count()
@@ -51,6 +64,13 @@ export const markTask = async (req: MarkTaskRequest, res: Response, next: NextFu
 export const editTask = async (req: EditTaskRequest, res: Response, next: NextFunction) => {
   const taskId = Number(req.params.taskId)
   const { description } = req.body
+
+  if (description.length === 0) {
+    const err = new Error('Description cannot be empty.')
+    res.status(400).send({ error: err })
+    next(err)
+    return
+  }
 
   await taskService.update(taskId, description, undefined)
 
