@@ -4,6 +4,7 @@ import { AppThunk } from '../appThunk'
 import { setPagesTotal } from '../Pagination/paginationSlice'
 import { Task, TaskListResponse, TaskResponse } from './taskTypes'
 import axios from 'axios'
+import { showSuccess } from '../Nofification/notificationSlice'
 
 interface TaskState {
   tasks: Task[]
@@ -105,7 +106,7 @@ export const fetchTasks = (): AppThunk =>
   async (dispatch, getState) => {
     const { sortBy, sortDir } = getState().sort
     const { currentPage } = getState().pagination
-    const { data, status } = await axios.get<TaskListResponse>('task/', {
+    const { data } = await axios.get<TaskListResponse>('task/', {
       params: {
         sortBy,
         sortDir,
@@ -113,27 +114,30 @@ export const fetchTasks = (): AppThunk =>
       }
     })
 
-    if (status === 200) {
-      dispatch(clearTasks())
-      dispatch(setTasks(data.tasks))
-      dispatch(setPagesTotal(Math.ceil(data.total / 3)))
-    }
+    dispatch(clearTasks())
+    dispatch(setTasks(data.tasks))
+    dispatch(setPagesTotal(Math.ceil(data.total / 3)))
   }
 
 export const createTask = (): AppThunk =>
   async (dispatch, getState) => {
     const { user, email, description } = getState().task.addTaskForm
-    const { data, status } = await axios.post<TaskResponse>('task/', {
+    const taskCount = getState().task.tasks.length
+    const { data } = await axios.post<TaskResponse>('task/', {
       user,
       email,
       description
     })
 
-    if (status === 200) {
+    if (taskCount < 3) {
       dispatch(addTask(data.task))
-      dispatch(setPagesTotal(Math.ceil(data.total / 3)))
-      dispatch(clearAddForm())
+    } else {
+      dispatch(fetchTasks())
     }
+
+    dispatch(setPagesTotal(Math.ceil(data.total / 3)))
+    dispatch(clearAddForm())
+    dispatch(showSuccess('New task was successfully created!'))
   }
 
 export const editTask = (): AppThunk =>
@@ -149,20 +153,18 @@ export const editTask = (): AppThunk =>
       return
     }
 
-    const { status } = await axios.put(`task/edit/${task.id}`, {
+    await axios.put(`task/edit/${task.id}`, {
       description
     })
 
-    if (status === 200) {
-      dispatch(updateTask({
-        id: task.id,
-        user: task.user,
-        email: task.email,
-        description,
-        completed: task.completed
-      }))
-      dispatch(clearEditForm())
-    }
+    dispatch(updateTask({
+      id: task.id,
+      user: task.user,
+      email: task.email,
+      description,
+      completed: task.completed
+    }))
+    dispatch(clearEditForm())
   }
 
 export const markTask = (id: number): AppThunk =>
@@ -175,19 +177,17 @@ export const markTask = (id: number): AppThunk =>
 
     const completed = task.completed
 
-    const { status } = await axios.put(`task/mark/${task.id}`, {
+    await axios.put(`task/mark/${task.id}`, {
       completed: !completed
     })
 
-    if (status === 200) {
-      dispatch(updateTask({
-        id: task.id,
-        user: task.user,
-        email: task.email,
-        description: task.description,
-        completed: !completed
-      }))
-    }
+    dispatch(updateTask({
+      id: task.id,
+      user: task.user,
+      email: task.email,
+      description: task.description,
+      completed: !completed
+    }))
   }
 
 export const selectTask = (state: RootState) => state.task

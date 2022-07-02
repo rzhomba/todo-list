@@ -1,0 +1,30 @@
+.notification {
+  position: absolute;
+  top: 90vh;
+  color: #333;
+  background: #fff;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  text-align: center;
+  cursor: default;
+  transition: 0.5s;
+}
+
+.notification-visible {
+  opacity: 1;
+  transform: translateY(-100%);
+}
+
+.notification-hidden {
+  opacity: 0;
+}
+
+.notification-success {
+  border: #77d91f 2px solid;
+}
+
+.notification-warning {
+  border: #d72b26 2px solid;
+}

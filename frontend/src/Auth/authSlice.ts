@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../store'
 import { AppThunk } from '../appThunk'
 import axios from 'axios'
+import { showWarning } from '../Nofification/notificationSlice'
 
 interface AuthState {
   loggedIn: boolean,
@@ -48,17 +49,17 @@ export const {
 export const signIn = (): AppThunk =>
   async (dispatch, getState) => {
     const { login, password } = getState().auth.authForm
-    const { status } = await axios.post('auth/', {
-      login,
-      password
-    })
-
-    dispatch(clearAuthForm())
-
-    if (status === 200) {
+    try {
+      await axios.post('auth/', {
+        login,
+        password
+      })
       dispatch(setLoggedIn(true))
       localStorage.setItem('authenticated', 'true')
-    } else if (status === 401) {
+    } catch {
+      dispatch(showWarning('Invalid authentication credentials.'))
+    } finally {
+      dispatch(clearAuthForm())
     }
   }
 

@@ -6,6 +6,7 @@ import AuthPage from './Pages/AuthPage'
 import './App.css'
 import 'normalize.css'
 import { setLoggedIn } from './Auth/authSlice'
+import Notification from './Nofification/Notification'
 
 const App = () => {
   const dispatch = useAppDispatch()
@@ -17,12 +18,15 @@ const App = () => {
   }, [])
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<TaskPage/>}/>
-        <Route path="/auth" element={<AuthPage/>}/>
-      </Routes>
-    </BrowserRouter>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<TaskPage/>}/>
+          <Route path="/auth" element={<AuthPage/>}/>
+        </Routes>
+      </BrowserRouter>
+      <Notification/>
+    </div>
   )
 }
 

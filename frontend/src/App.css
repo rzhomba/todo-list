@@ -34,6 +34,7 @@ textarea {
 #root {
   max-width: 360px;
   margin: auto;
+  position: relative;
 }
 
 .button-active {
